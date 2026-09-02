@@ -37,7 +37,10 @@ function AuthPage() {
     setBusy(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setBusy(false);
-    if (error) return toast.error(lang === "te" ? "లాగిన్ విఫలమైంది. వివరాలు సరిచూడండి." : "Sign in failed. Please check your details.");
+    if (error) {
+      toast.error(lang === "te" ? "లాగిన్ విఫలమైంది. వివరాలు సరిచూడండి." : "Sign in failed. Please check your details.");
+      return;
+    }
     navigate({ to: "/onboarding" });
   }
 
