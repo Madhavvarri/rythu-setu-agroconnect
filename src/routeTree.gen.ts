@@ -14,6 +14,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as JobsRouteImport } from './routes/jobs'
 import { Route as MarketRouteImport } from './routes/market'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
+import { Route as OrganicRouteImport } from './routes/organic'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const OnboardingRoute = OnboardingRouteImport.update({
   path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OrganicRoute = OrganicRouteImport.update({
+  id: '/organic',
+  path: '/organic',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
+  '/organic': typeof OrganicRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
+  '/organic': typeof OrganicRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,21 @@ export interface FileRoutesById {
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
+  '/organic': typeof OrganicRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/jobs' | '/market' | '/onboarding'
+  fullPaths: '/' | '/auth' | '/jobs' | '/market' | '/onboarding' | '/organic'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/jobs' | '/market' | '/onboarding'
-  id: '__root__' | '/' | '/auth' | '/jobs' | '/market' | '/onboarding'
+  to: '/' | '/auth' | '/jobs' | '/market' | '/onboarding' | '/organic'
+  id:
+    | '__root__'
+    | '/'
+    | '/auth'
+    | '/jobs'
+    | '/market'
+    | '/onboarding'
+    | '/organic'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +93,7 @@ export interface RootRouteChildren {
   JobsRoute: typeof JobsRoute
   MarketRoute: typeof MarketRoute
   OnboardingRoute: typeof OnboardingRoute
+  OrganicRoute: typeof OrganicRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +133,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/organic': {
+      id: '/organic'
+      path: '/organic'
+      fullPath: '/organic'
+      preLoaderRoute: typeof OrganicRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   JobsRoute: JobsRoute,
   MarketRoute: MarketRoute,
   OnboardingRoute: OnboardingRoute,
+  OrganicRoute: OrganicRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
