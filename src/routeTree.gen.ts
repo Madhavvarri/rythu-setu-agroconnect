@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as InsuranceRouteImport } from './routes/insurance'
 import { Route as JobsRouteImport } from './routes/jobs'
 import { Route as MarketRouteImport } from './routes/market'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
@@ -24,6 +25,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsuranceRoute = InsuranceRouteImport.update({
+  id: '/insurance',
+  path: '/insurance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JobsRoute = JobsRouteImport.update({
@@ -50,6 +56,7 @@ const OrganicRoute = OrganicRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
   '/market': typeof MarketRoute
   '/onboarding': typeof OnboardingRoute
@@ -74,13 +83,28 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/jobs' | '/market' | '/onboarding' | '/organic'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/insurance'
+    | '/jobs'
+    | '/market'
+    | '/onboarding'
+    | '/organic'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/jobs' | '/market' | '/onboarding' | '/organic'
+  to:
+    | '/'
+    | '/auth'
+    | '/insurance'
+    | '/jobs'
+    | '/market'
+    | '/onboarding'
+    | '/organic'
   id:
     | '__root__'
     | '/'
     | '/auth'
+    | '/insurance'
     | '/jobs'
     | '/market'
     | '/onboarding'
@@ -90,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  InsuranceRoute: typeof InsuranceRoute
   JobsRoute: typeof JobsRoute
   MarketRoute: typeof MarketRoute
   OnboardingRoute: typeof OnboardingRoute
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insurance': {
+      id: '/insurance'
+      path: '/insurance'
+      fullPath: '/insurance'
+      preLoaderRoute: typeof InsuranceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jobs': {
@@ -146,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  InsuranceRoute: InsuranceRoute,
   JobsRoute: JobsRoute,
   MarketRoute: MarketRoute,
   OnboardingRoute: OnboardingRoute,
