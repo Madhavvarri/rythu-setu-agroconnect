@@ -35,7 +35,7 @@ export function LanguageToggle() {
   );
 }
 
-export function AppHeader({ subtitle }: { subtitle?: string }) {
+export function AppHeader({ subtitle }: { subtitle?: string | undefined }) {
   const { t } = useI18n();
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-card/95 backdrop-blur">
