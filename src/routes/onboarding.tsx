@@ -73,7 +73,7 @@ function Onboarding() {
         .from("profiles")
         .update({
           full_name: form.full_name || profile?.full_name || "",
-          mobile: form.mobile || profile?.mobile,
+          mobile: form.mobile || profile?.mobile || null,
           language: lang,
           state: form.state,
           district: form.district,
