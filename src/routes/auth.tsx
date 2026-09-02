@@ -59,16 +59,16 @@ function AuthPage() {
       },
     });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     toast.success(lang === "te" ? "ఖాతా సృష్టించబడింది. ఇమెయిల్ నిర్ధారించండి." : "Account created. Please confirm your email if prompted.");
     navigate({ to: "/onboarding" });
   }
 
   async function handleGoogle() {
-    const result = await lovable.auth.signInWithOAuth("google", { redirect_uri: window.location.origin });
-    if (result.error) return toast.error(t("genericError"));
-    if (result.redirected) return;
-    navigate({ to: "/onboarding" });
+    toast.info(lang === "te" ? "Google సైన్ ఇన్ త్వరలో అందుబాటులోకి వస్తుంది." : "Google sign-in will be enabled shortly.");
   }
 
   return (
