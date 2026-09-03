@@ -14,9 +14,10 @@ import { resolve } from "node:path";
 
 const root = process.cwd();
 
-const result = spawnSync("vite", ["build"], {
+const viteBin = resolve(root, "node_modules/vite/bin/vite.js");
+
+const result = spawnSync(process.execPath, [viteBin, "build"], {
   stdio: "inherit",
-  shell: true,
   env: { ...process.env, CAP_BUILD: "1" },
 });
 
