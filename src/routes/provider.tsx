@@ -308,7 +308,7 @@ function ProviderPage() {
       {requests?.length ? (
         <div className="space-y-3">
           {requests.map((r: any) => (
-            <RequestCard key={r.id} r={r} lang={lang} t={t} providerId={provider.id} onQuote={(v) => sendQuote.mutate({ requestId: r.id, ...v })} />
+            <RequestCard key={r.id} r={r} lang={lang} t={t} providerId={provider.id} onQuote={(v: any) => sendQuote.mutate({ requestId: r.id, ...v })} />
           ))}
         </div>
       ) : (
