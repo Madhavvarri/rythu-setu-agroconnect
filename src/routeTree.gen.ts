@@ -20,6 +20,7 @@ import { Route as OrganicRouteImport } from './routes/organic'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as ServicesPostRequirementRouteImport } from './routes/services.post-requirement'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -76,6 +77,11 @@ const ServicesSlugRoute = ServicesSlugRouteImport.update({
   path: '/services/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesPostRequirementRoute = ServicesPostRequirementRouteImport.update({
+  id: '/services/post-requirement',
+  path: '/services/post-requirement',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
   '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/organic'
     | '/profile'
     | '/services/$slug'
+    | '/services/post-requirement'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/organic'
     | '/profile'
     | '/services/$slug'
+    | '/services/post-requirement'
     | '/services'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/organic'
     | '/profile'
     | '/services/$slug'
+    | '/services/post-requirement'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   OrganicRoute: typeof OrganicRoute
   ProfileRoute: typeof ProfileRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
+  ServicesPostRequirementRoute: typeof ServicesPostRequirementRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -252,6 +265,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/post-requirement': {
+      id: '/services/post-requirement'
+      path: '/services/post-requirement'
+      fullPath: '/services/post-requirement'
+      preLoaderRoute: typeof ServicesPostRequirementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   OrganicRoute: OrganicRoute,
   ProfileRoute: ProfileRoute,
   ServicesSlugRoute: ServicesSlugRoute,
+  ServicesPostRequirementRoute: ServicesPostRequirementRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
