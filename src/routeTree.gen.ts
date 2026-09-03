@@ -19,6 +19,7 @@ import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OrganicRouteImport } from './routes/organic'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -106,6 +114,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +129,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/services/$slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +142,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/services/$slug'
     | '/services'
   id:
     | '__root__'
@@ -144,6 +155,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/services/$slug'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +169,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   OrganicRoute: typeof OrganicRoute
   ProfileRoute: typeof ProfileRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -245,6 +265,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   OrganicRoute: OrganicRoute,
   ProfileRoute: ProfileRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport

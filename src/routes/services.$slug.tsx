@@ -13,7 +13,7 @@ import { DISTANCE_FILTERS, pick, PRICING_UNITS, recommendationScore, rupees } fr
 import { useI18n } from "@/lib/i18n";
 import { useSession } from "@/lib/session";
 
-type Search = { service?: string; sort?: string };
+type Search = { service?: string | undefined; sort?: string | undefined };
 
 export const Route = createFileRoute("/services/$slug")({
   validateSearch: (s: Record<string, unknown>): Search => ({
