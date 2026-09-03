@@ -82,6 +82,24 @@ function Index() {
         )}
       </div>
 
+      <SectionTitle>{t("farmingServices")}</SectionTitle>
+      <Card className="border-border bg-accent">
+        <CardContent className="space-y-3 p-4">
+          <p className="font-display text-base font-bold">{t("needServiceForFarm")}</p>
+          <div className="grid grid-cols-3 gap-2">
+            <Button asChild size="sm" className="h-11">
+              <Link to="/services">{t("findService")}</Link>
+            </Button>
+            <Button asChild size="sm" variant="secondary" className="h-11">
+              <Link to="/bookings">{t("myBookings")}</Link>
+            </Button>
+            <Button asChild size="sm" variant="outline" className="h-11">
+              <Link to="/services/post-requirement">{t("postRequirement")}</Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+
       <SectionTitle>{lang === "te" ? "సేవలు" : "Services"}</SectionTitle>
       <div className="grid grid-cols-2 gap-3">
         {services.map(({ to, titleKey, descKey, Icon, tone }) => (
