@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as BookingsRouteImport } from './routes/bookings'
 import { Route as CartRouteImport } from './routes/cart'
 import { Route as InsuranceRouteImport } from './routes/insurance'
 import { Route as JobsRouteImport } from './routes/jobs'
@@ -18,6 +19,11 @@ import { Route as MarketRouteImport } from './routes/market'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OrganicRouteImport } from './routes/organic'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ProviderRouteImport } from './routes/provider'
+import { Route as ProvidersIdRouteImport } from './routes/providers.$id'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as ServicesPostRequirementRouteImport } from './routes/services.post-requirement'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -27,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingsRoute = BookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CartRoute = CartRouteImport.update({
@@ -64,10 +75,36 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProviderRoute = ProviderRouteImport.update({
+  id: '/provider',
+  path: '/provider',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProvidersIdRoute = ProvidersIdRouteImport.update({
+  id: '/providers/$id',
+  path: '/providers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/services/',
+  path: '/services/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/services/$slug',
+  path: '/services/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesPostRequirementRoute = ServicesPostRequirementRouteImport.update({
+  id: '/services/post-requirement',
+  path: '/services/post-requirement',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
   '/cart': typeof CartRoute
   '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
@@ -75,10 +112,16 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/provider': typeof ProviderRoute
+  '/providers/$id': typeof ProvidersIdRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
   '/cart': typeof CartRoute
   '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
@@ -86,11 +129,17 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/provider': typeof ProviderRoute
+  '/providers/$id': typeof ProvidersIdRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
+  '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/bookings': typeof BookingsRoute
   '/cart': typeof CartRoute
   '/insurance': typeof InsuranceRoute
   '/jobs': typeof JobsRoute
@@ -98,12 +147,18 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/provider': typeof ProviderRoute
+  '/providers/$id': typeof ProvidersIdRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/services/post-requirement': typeof ServicesPostRequirementRoute
+  '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/auth'
+    | '/bookings'
     | '/cart'
     | '/insurance'
     | '/jobs'
@@ -111,10 +166,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/provider'
+    | '/providers/$id'
+    | '/services/$slug'
+    | '/services/post-requirement'
+    | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/bookings'
     | '/cart'
     | '/insurance'
     | '/jobs'
@@ -122,10 +183,16 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/provider'
+    | '/providers/$id'
+    | '/services/$slug'
+    | '/services/post-requirement'
+    | '/services'
   id:
     | '__root__'
     | '/'
     | '/auth'
+    | '/bookings'
     | '/cart'
     | '/insurance'
     | '/jobs'
@@ -133,11 +200,17 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/provider'
+    | '/providers/$id'
+    | '/services/$slug'
+    | '/services/post-requirement'
+    | '/services/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
+  BookingsRoute: typeof BookingsRoute
   CartRoute: typeof CartRoute
   InsuranceRoute: typeof InsuranceRoute
   JobsRoute: typeof JobsRoute
@@ -145,6 +218,11 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   OrganicRoute: typeof OrganicRoute
   ProfileRoute: typeof ProfileRoute
+  ProviderRoute: typeof ProviderRoute
+  ProvidersIdRoute: typeof ProvidersIdRoute
+  ServicesSlugRoute: typeof ServicesSlugRoute
+  ServicesPostRequirementRoute: typeof ServicesPostRequirementRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -161,6 +239,13 @@ declare module '@tanstack/react-router' {
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bookings': {
+      id: '/bookings'
+      path: '/bookings'
+      fullPath: '/bookings'
+      preLoaderRoute: typeof BookingsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cart': {
@@ -212,12 +297,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/provider': {
+      id: '/provider'
+      path: '/provider'
+      fullPath: '/provider'
+      preLoaderRoute: typeof ProviderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/providers/$id': {
+      id: '/providers/$id'
+      path: '/providers/$id'
+      fullPath: '/providers/$id'
+      preLoaderRoute: typeof ProvidersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/services'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/services/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/post-requirement': {
+      id: '/services/post-requirement'
+      path: '/services/post-requirement'
+      fullPath: '/services/post-requirement'
+      preLoaderRoute: typeof ServicesPostRequirementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
+  BookingsRoute: BookingsRoute,
   CartRoute: CartRoute,
   InsuranceRoute: InsuranceRoute,
   JobsRoute: JobsRoute,
@@ -225,6 +346,11 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   OrganicRoute: OrganicRoute,
   ProfileRoute: ProfileRoute,
+  ProviderRoute: ProviderRoute,
+  ProvidersIdRoute: ProvidersIdRoute,
+  ServicesSlugRoute: ServicesSlugRoute,
+  ServicesPostRequirementRoute: ServicesPostRequirementRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

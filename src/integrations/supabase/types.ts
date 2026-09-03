@@ -14,6 +14,55 @@ export type Database = {
   }
   public: {
     Tables: {
+      booking_messages: {
+        Row: {
+          booking_id: string | null
+          created_at: string
+          id: string
+          message: string
+          request_id: string | null
+          sender_id: string
+        }
+        Insert: {
+          booking_id?: string | null
+          created_at?: string
+          id?: string
+          message: string
+          request_id?: string | null
+          sender_id: string
+        }
+        Update: {
+          booking_id?: string | null
+          created_at?: string
+          id?: string
+          message?: string
+          request_id?: string | null
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_messages_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "service_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booking_messages_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "service_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booking_messages_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cart_items: {
         Row: {
           created_at: string
@@ -532,6 +581,27 @@ export type Database = {
         }
         Relationships: []
       }
+      platform_settings: {
+        Row: {
+          description: string | null
+          key: string
+          updated_at: string
+          value: Json
+        }
+        Insert: {
+          description?: string | null
+          key: string
+          updated_at?: string
+          value: Json
+        }
+        Update: {
+          description?: string | null
+          key?: string
+          updated_at?: string
+          value?: Json
+        }
+        Relationships: []
+      }
       products: {
         Row: {
           approval_status: string
@@ -661,6 +731,254 @@ export type Database = {
         }
         Relationships: []
       }
+      provider_availability: {
+        Row: {
+          created_at: string
+          date: string
+          end_time: string | null
+          id: string
+          note: string | null
+          provider_id: string
+          start_time: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          end_time?: string | null
+          id?: string
+          note?: string | null
+          provider_id: string
+          start_time?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          end_time?: string | null
+          id?: string
+          note?: string | null
+          provider_id?: string
+          start_time?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_availability_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_documents: {
+        Row: {
+          admin_note: string | null
+          created_at: string
+          doc_type: string
+          file_url: string
+          id: string
+          provider_id: string
+          status: string
+        }
+        Insert: {
+          admin_note?: string | null
+          created_at?: string
+          doc_type: string
+          file_url: string
+          id?: string
+          provider_id: string
+          status?: string
+        }
+        Update: {
+          admin_note?: string | null
+          created_at?: string
+          doc_type?: string
+          file_url?: string
+          id?: string
+          provider_id?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_documents_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_equipment: {
+        Row: {
+          brand: string | null
+          created_at: string
+          delivery_available: boolean
+          description: string | null
+          horsepower: string | null
+          id: string
+          images: string[]
+          location: string | null
+          model: string | null
+          name: string
+          provider_id: string
+          rental_price_day: number | null
+          rental_price_hour: number | null
+          security_deposit: number | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          brand?: string | null
+          created_at?: string
+          delivery_available?: boolean
+          description?: string | null
+          horsepower?: string | null
+          id?: string
+          images?: string[]
+          location?: string | null
+          model?: string | null
+          name: string
+          provider_id: string
+          rental_price_day?: number | null
+          rental_price_hour?: number | null
+          security_deposit?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          brand?: string | null
+          created_at?: string
+          delivery_available?: boolean
+          description?: string | null
+          horsepower?: string | null
+          id?: string
+          images?: string[]
+          location?: string | null
+          model?: string | null
+          name?: string
+          provider_id?: string
+          rental_price_day?: number | null
+          rental_price_hour?: number | null
+          security_deposit?: number | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_equipment_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_locations: {
+        Row: {
+          created_at: string
+          district: string | null
+          id: string
+          mandal: string | null
+          provider_id: string
+          radius_km: number
+          state: string | null
+          village: string | null
+        }
+        Insert: {
+          created_at?: string
+          district?: string | null
+          id?: string
+          mandal?: string | null
+          provider_id: string
+          radius_km?: number
+          state?: string | null
+          village?: string | null
+        }
+        Update: {
+          created_at?: string
+          district?: string | null
+          id?: string
+          mandal?: string | null
+          provider_id?: string
+          radius_km?: number
+          state?: string | null
+          village?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_locations_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      provider_services: {
+        Row: {
+          created_at: string
+          equipment_details: string | null
+          id: string
+          materials_supplied_by: string
+          minimum_booking: string | null
+          notes: string | null
+          price: number | null
+          price_per_hour: number | null
+          pricing_unit: string
+          provider_id: string
+          service_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          equipment_details?: string | null
+          id?: string
+          materials_supplied_by?: string
+          minimum_booking?: string | null
+          notes?: string | null
+          price?: number | null
+          price_per_hour?: number | null
+          pricing_unit?: string
+          provider_id: string
+          service_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          equipment_details?: string | null
+          id?: string
+          materials_supplied_by?: string
+          minimum_booking?: string | null
+          notes?: string | null
+          price?: number | null
+          price_per_hour?: number | null
+          pricing_unit?: string
+          provider_id?: string
+          service_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "provider_services_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "provider_services_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reviews: {
         Row: {
           comment: string | null
@@ -750,6 +1068,629 @@ export type Database = {
           },
         ]
       }
+      service_bookings: {
+        Row: {
+          agreed_price: number
+          booking_code: string
+          booking_date: string | null
+          booking_status: string
+          cancellation_reason: string | null
+          cancelled_by: string | null
+          commission_amount: number
+          commission_percent: number
+          created_at: string
+          farm_size_acres: number | null
+          farmer_id: string
+          id: string
+          location: string | null
+          payment_method: string | null
+          payment_status: string
+          provider_id: string
+          provider_payout: number
+          quote_id: string | null
+          request_id: string | null
+          reschedule_reason: string | null
+          reschedule_requested_by: string | null
+          service_id: string | null
+          start_time: string | null
+          updated_at: string
+        }
+        Insert: {
+          agreed_price?: number
+          booking_code?: string
+          booking_date?: string | null
+          booking_status?: string
+          cancellation_reason?: string | null
+          cancelled_by?: string | null
+          commission_amount?: number
+          commission_percent?: number
+          created_at?: string
+          farm_size_acres?: number | null
+          farmer_id: string
+          id?: string
+          location?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          provider_id: string
+          provider_payout?: number
+          quote_id?: string | null
+          request_id?: string | null
+          reschedule_reason?: string | null
+          reschedule_requested_by?: string | null
+          service_id?: string | null
+          start_time?: string | null
+          updated_at?: string
+        }
+        Update: {
+          agreed_price?: number
+          booking_code?: string
+          booking_date?: string | null
+          booking_status?: string
+          cancellation_reason?: string | null
+          cancelled_by?: string | null
+          commission_amount?: number
+          commission_percent?: number
+          created_at?: string
+          farm_size_acres?: number | null
+          farmer_id?: string
+          id?: string
+          location?: string | null
+          payment_method?: string | null
+          payment_status?: string
+          provider_id?: string
+          provider_payout?: number
+          quote_id?: string | null
+          request_id?: string | null
+          reschedule_reason?: string | null
+          reschedule_requested_by?: string | null
+          service_id?: string | null
+          start_time?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_bookings_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_bookings_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_bookings_quote_id_fkey"
+            columns: ["quote_id"]
+            isOneToOne: false
+            referencedRelation: "service_quotes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_bookings_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "service_requests"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_bookings_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          description_te: string | null
+          icon: string
+          id: string
+          name: string
+          name_te: string | null
+          slug: string
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          description_te?: string | null
+          icon?: string
+          id?: string
+          name: string
+          name_te?: string | null
+          slug: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          description_te?: string | null
+          icon?: string
+          id?: string
+          name?: string
+          name_te?: string | null
+          slug?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      service_complaints: {
+        Row: {
+          attachments: string[]
+          booking_id: string | null
+          category: string
+          created_at: string
+          description: string
+          id: string
+          reporter_id: string
+          resolution: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          attachments?: string[]
+          booking_id?: string | null
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          reporter_id: string
+          resolution?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          attachments?: string[]
+          booking_id?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          reporter_id?: string
+          resolution?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_complaints_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "service_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_complaints_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_providers: {
+        Row: {
+          about: string | null
+          accepts_urgent: boolean
+          availability_status: string
+          business_name: string
+          completed_jobs: number
+          created_at: string
+          district: string | null
+          experience_years: number
+          id: string
+          is_demo: boolean
+          mandal: string | null
+          max_bookings_per_day: number
+          mobile_verified: boolean
+          profile_image: string | null
+          rating: number
+          rating_count: number
+          response_rate: number
+          service_radius_km: number
+          state: string | null
+          status: string
+          updated_at: string
+          user_id: string
+          verification_status: string
+          village: string | null
+          working_days: string[]
+          working_hours_end: string
+          working_hours_start: string
+        }
+        Insert: {
+          about?: string | null
+          accepts_urgent?: boolean
+          availability_status?: string
+          business_name: string
+          completed_jobs?: number
+          created_at?: string
+          district?: string | null
+          experience_years?: number
+          id?: string
+          is_demo?: boolean
+          mandal?: string | null
+          max_bookings_per_day?: number
+          mobile_verified?: boolean
+          profile_image?: string | null
+          rating?: number
+          rating_count?: number
+          response_rate?: number
+          service_radius_km?: number
+          state?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+          verification_status?: string
+          village?: string | null
+          working_days?: string[]
+          working_hours_end?: string
+          working_hours_start?: string
+        }
+        Update: {
+          about?: string | null
+          accepts_urgent?: boolean
+          availability_status?: string
+          business_name?: string
+          completed_jobs?: number
+          created_at?: string
+          district?: string | null
+          experience_years?: number
+          id?: string
+          is_demo?: boolean
+          mandal?: string | null
+          max_bookings_per_day?: number
+          mobile_verified?: boolean
+          profile_image?: string | null
+          rating?: number
+          rating_count?: number
+          response_rate?: number
+          service_radius_km?: number
+          state?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+          verification_status?: string
+          village?: string | null
+          working_days?: string[]
+          working_hours_end?: string
+          working_hours_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_providers_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_quotes: {
+        Row: {
+          additional_fee: number
+          base_price: number
+          created_at: string
+          expires_at: string | null
+          id: string
+          locked: boolean
+          notes: string | null
+          provider_id: string
+          request_id: string
+          status: string
+          total: number
+          transport_fee: number
+          updated_at: string
+        }
+        Insert: {
+          additional_fee?: number
+          base_price?: number
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          locked?: boolean
+          notes?: string | null
+          provider_id: string
+          request_id: string
+          status?: string
+          total?: number
+          transport_fee?: number
+          updated_at?: string
+        }
+        Update: {
+          additional_fee?: number
+          base_price?: number
+          created_at?: string
+          expires_at?: string | null
+          id?: string
+          locked?: boolean
+          notes?: string | null
+          provider_id?: string
+          request_id?: string
+          status?: string
+          total?: number
+          transport_fee?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_quotes_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_quotes_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "service_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_requests: {
+        Row: {
+          budget: number | null
+          category_id: string | null
+          created_at: string
+          crop: string | null
+          description: string | null
+          district: string | null
+          duration: string | null
+          equipment_required: string | null
+          farm_size_acres: number | null
+          farmer_id: string
+          id: string
+          is_open_requirement: boolean
+          is_urgent: boolean
+          location_note: string | null
+          mandal: string | null
+          photos: string[]
+          preferred_date: string | null
+          preferred_time: string | null
+          provider_id: string | null
+          request_code: string
+          service_id: string | null
+          state: string | null
+          status: string
+          title: string | null
+          updated_at: string
+          village: string | null
+        }
+        Insert: {
+          budget?: number | null
+          category_id?: string | null
+          created_at?: string
+          crop?: string | null
+          description?: string | null
+          district?: string | null
+          duration?: string | null
+          equipment_required?: string | null
+          farm_size_acres?: number | null
+          farmer_id: string
+          id?: string
+          is_open_requirement?: boolean
+          is_urgent?: boolean
+          location_note?: string | null
+          mandal?: string | null
+          photos?: string[]
+          preferred_date?: string | null
+          preferred_time?: string | null
+          provider_id?: string | null
+          request_code?: string
+          service_id?: string | null
+          state?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Update: {
+          budget?: number | null
+          category_id?: string | null
+          created_at?: string
+          crop?: string | null
+          description?: string | null
+          district?: string | null
+          duration?: string | null
+          equipment_required?: string | null
+          farm_size_acres?: number | null
+          farmer_id?: string
+          id?: string
+          is_open_requirement?: boolean
+          is_urgent?: boolean
+          location_note?: string | null
+          mandal?: string | null
+          photos?: string[]
+          preferred_date?: string | null
+          preferred_time?: string | null
+          provider_id?: string | null
+          request_code?: string
+          service_id?: string | null
+          state?: string | null
+          status?: string
+          title?: string | null
+          updated_at?: string
+          village?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_requests_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "service_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_requests_farmer_id_fkey"
+            columns: ["farmer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_requests_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_requests_service_id_fkey"
+            columns: ["service_id"]
+            isOneToOne: false
+            referencedRelation: "services"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      service_reviews: {
+        Row: {
+          behaviour_rating: number | null
+          booking_id: string
+          comment: string | null
+          created_at: string
+          direction: string
+          equipment_rating: number | null
+          id: string
+          provider_id: string | null
+          quality_rating: number | null
+          rating: number
+          reviewer_id: string
+          status: string
+          target_user_id: string | null
+          timeliness_rating: number | null
+          value_rating: number | null
+        }
+        Insert: {
+          behaviour_rating?: number | null
+          booking_id: string
+          comment?: string | null
+          created_at?: string
+          direction?: string
+          equipment_rating?: number | null
+          id?: string
+          provider_id?: string | null
+          quality_rating?: number | null
+          rating: number
+          reviewer_id: string
+          status?: string
+          target_user_id?: string | null
+          timeliness_rating?: number | null
+          value_rating?: number | null
+        }
+        Update: {
+          behaviour_rating?: number | null
+          booking_id?: string
+          comment?: string | null
+          created_at?: string
+          direction?: string
+          equipment_rating?: number | null
+          id?: string
+          provider_id?: string | null
+          quality_rating?: number | null
+          rating?: number
+          reviewer_id?: string
+          status?: string
+          target_user_id?: string | null
+          timeliness_rating?: number | null
+          value_rating?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_reviews_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "service_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_reviews_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "service_providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_reviews_reviewer_id_fkey"
+            columns: ["reviewer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "service_reviews_target_user_id_fkey"
+            columns: ["target_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      services: {
+        Row: {
+          category_id: string
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          name_te: string | null
+          pricing_type: string
+          slug: string
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          name_te?: string | null
+          pricing_type?: string
+          slug: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          name_te?: string | null
+          pricing_type?: string
+          slug?: string
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "services_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "service_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string
@@ -780,9 +1721,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_provider_owner: { Args: { _provider_id: string }; Returns: boolean }
     }
     Enums: {
-      app_role: "farmer" | "labourer" | "seller" | "admin"
+      app_role: "farmer" | "labourer" | "seller" | "admin" | "provider"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -910,7 +1852,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["farmer", "labourer", "seller", "admin"],
+      app_role: ["farmer", "labourer", "seller", "admin", "provider"],
     },
   },
 } as const
