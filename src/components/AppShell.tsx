@@ -1,12 +1,13 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { Bell, Home, Leaf, ShieldCheck, ShoppingBasket, User, Users } from "lucide-react";
+import { Bell, Home, Leaf, ShieldCheck, ShoppingBasket, Tractor, User, Users } from "lucide-react";
 
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { to: "/", key: "home", Icon: Home },
+  { to: "/services", key: "services", Icon: Tractor },
   { to: "/jobs", key: "jobs", Icon: Users },
   { to: "/market", key: "market", Icon: ShoppingBasket },
   { to: "/organic", key: "organic", Icon: Leaf },
@@ -69,7 +70,7 @@ export function BottomNav() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
     <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card">
-      <div className="mx-auto grid max-w-3xl grid-cols-6">
+      <div className="mx-auto grid max-w-3xl grid-cols-7">
         {navItems.map(({ to, key, Icon }) => {
           const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
           return (
