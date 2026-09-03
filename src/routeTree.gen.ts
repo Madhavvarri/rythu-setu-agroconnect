@@ -18,6 +18,7 @@ import { Route as MarketRouteImport } from './routes/market'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as OrganicRouteImport } from './routes/organic'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ProvidersIdRouteImport } from './routes/providers.$id'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as ServicesPostRequirementRouteImport } from './routes/services.post-requirement'
@@ -67,6 +68,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProvidersIdRoute = ProvidersIdRouteImport.update({
+  id: '/providers/$id',
+  path: '/providers/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/services/',
   path: '/services/',
@@ -93,6 +99,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/providers/$id': typeof ProvidersIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services/': typeof ServicesIndexRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/providers/$id': typeof ProvidersIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services': typeof ServicesIndexRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/organic': typeof OrganicRoute
   '/profile': typeof ProfileRoute
+  '/providers/$id': typeof ProvidersIdRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/services/post-requirement': typeof ServicesPostRequirementRoute
   '/services/': typeof ServicesIndexRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/providers/$id'
     | '/services/$slug'
     | '/services/post-requirement'
     | '/services/'
@@ -152,6 +162,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/providers/$id'
     | '/services/$slug'
     | '/services/post-requirement'
     | '/services'
@@ -166,6 +177,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/organic'
     | '/profile'
+    | '/providers/$id'
     | '/services/$slug'
     | '/services/post-requirement'
     | '/services/'
@@ -181,6 +193,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   OrganicRoute: typeof OrganicRoute
   ProfileRoute: typeof ProfileRoute
+  ProvidersIdRoute: typeof ProvidersIdRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesPostRequirementRoute: typeof ServicesPostRequirementRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/providers/$id': {
+      id: '/providers/$id'
+      path: '/providers/$id'
+      fullPath: '/providers/$id'
+      preLoaderRoute: typeof ProvidersIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/': {
       id: '/services/'
       path: '/services'
@@ -285,6 +305,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   OrganicRoute: OrganicRoute,
   ProfileRoute: ProfileRoute,
+  ProvidersIdRoute: ProvidersIdRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   ServicesPostRequirementRoute: ServicesPostRequirementRoute,
   ServicesIndexRoute: ServicesIndexRoute,
