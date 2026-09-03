@@ -150,7 +150,7 @@ function BookingsPage() {
 
   const updateBooking = useMutation({
     mutationFn: async ({ id, patch }: { id: string; patch: Record<string, unknown> }) => {
-      const { error } = await supabase.from("service_bookings").update(patch).eq("id", id);
+      const { error } = await supabase.from("service_bookings").update(patch as never).eq("id", id);
       if (error) throw error;
     },
     onSuccess: () => {
