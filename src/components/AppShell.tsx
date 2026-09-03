@@ -69,7 +69,7 @@ export function BottomNav() {
   const { t } = useI18n();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card">
+    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-border bg-card pb-[env(safe-area-inset-bottom)]">
       <div className="mx-auto grid max-w-3xl grid-cols-7">
         {navItems.map(({ to, key, Icon }) => {
           const active = to === "/" ? pathname === "/" : pathname.startsWith(to);

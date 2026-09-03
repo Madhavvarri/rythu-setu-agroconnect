@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { initNative } from "../lib/native";
 
 function NotFoundComponent() {
   return (
@@ -76,12 +77,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1, viewport-fit=cover",
+      },
+      { title: "RythuSetu — Farming Services, Labour & Market" },
+      {
+        name: "description",
+        content:
+          "RythuSetu connects Indian farmers with labour, farming services, market produce, organic inputs and crop insurance support.",
+      },
+      { name: "author", content: "RythuSetu" },
+      { name: "theme-color", content: "#1b7f4b" },
+      { property: "og:title", content: "RythuSetu — Farming Services, Labour & Market" },
+      {
+        property: "og:description",
+        content:
+          "Connect with farm labour, book farming services, buy produce and organic inputs, and get crop insurance support.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -116,6 +129,9 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  // Android back button, status bar and external links (no-op on the web).
+  useEffect(() => initNative(() => false), []);
 
   return (
     <QueryClientProvider client={queryClient}>
