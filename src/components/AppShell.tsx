@@ -94,7 +94,7 @@ export function BottomNav() {
 
 export function AppShell({ children, subtitle }: { children: ReactNode; subtitle?: string }) {
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background overflow-y-auto pb-20">
       <AppHeader subtitle={subtitle} />
       <main className="mx-auto max-w-3xl px-4 py-4">{children}</main>
       <BottomNav />
